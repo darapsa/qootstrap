@@ -1,0 +1,4 @@
+module QtQuick.Controls.Bootstrap
+plugin qtquickcontrols2bootstrapstyleplugin
+classname QtQuickControls2BootstrapStylePlugin
+depends QtQuick.Controls 2.5
