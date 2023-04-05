@@ -1,25 +1,19 @@
 #ifndef BOOTSTRAP_HXX
 #define BOOTSTRAP_HXX
 
-#include <QObject>
 #include <QtQml>
 
-class Bootstrap : public QObject
+class Bootstrap : public QQmlEngineExtensionPlugin
 {
 	Q_OBJECT
-	Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
+	Q_PLUGIN_METADATA(IID QQmlEngineExtensionInterface_iid)
 	Q_PROPERTY(Purpose purpose READ purpose WRITE setPurpose NOTIFY purposeChanged)
 
 	public:
 		explicit Bootstrap(QObject *parent = nullptr);
 		static Bootstrap *qmlAttachedProperties(QObject *object);
 
-		enum class Theme {
-			Light,
-			Dark
-		};
-
-		enum class Purpose {
+		enum Purpose {
 			None,
 			Primary,
 			Secondary,
@@ -31,21 +25,14 @@ class Bootstrap : public QObject
 			Dark,
 			Link
 		};
-
-		Q_ENUM(Theme)
 		Q_ENUM(Purpose)
-
-		Theme theme() const;
-		void setTheme(Theme theme);
 		Purpose purpose() const;
 		void setPurpose(Purpose purpose);
 
 	signals:
-		void themeChanged();
 		void purposeChanged();
 
 	private:
-		Theme m_theme;
 		Purpose m_purpose;
 };
 

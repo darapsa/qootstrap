@@ -1,13 +1,23 @@
 TEMPLATE = lib
-CONFIG += qt plugin qmltypes
+CONFIG += plugin qmltypes
 QT += qml
 
 QML_IMPORT_NAME = Bootstrap
 QML_IMPORT_MAJOR_VERSION = 5
 QML_IMPORT_MINOR_VERSION = 3
 
-DESTDIR = imports/$$QML_IMPORT_NAME
-TARGET = qtquickcontrols2bootstrapstyleplugin
+import.files = \
+	qmldir \
+	$${QML_IMPORT_NAME}.qml
+import.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
-HEADERS += bootstrap.hxx
-SOURCES += bootstrap.cxx
+style.files = \
+	ApplicationWindow.qml
+style.path = $$[QT_INSTALL_QML]/QtQuick/Controls.2/$$QML_IMPORT_NAME
+
+HEADERS += $${TARGET}.hxx
+SOURCES += $${TARGET}.cxx
+TARGET = qqc2$$TARGET
+target.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
+
+INSTALLS += import style target
