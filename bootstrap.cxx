@@ -3,8 +3,8 @@
 
 Bootstrap::Bootstrap(QObject *parent):
 	QObject(parent),
-	bsMode(LightMode),
 	bsTheme(None),
+	bsDarkMode(false),
 	bsLightBodyBg("#fff"),
 	bsDarkBodyBg("#212529")
 {
@@ -17,8 +17,8 @@ Bootstrap::Bootstrap(QObject *parent):
 		toml_free(toml);
 		return;
 	}
-	auto mode = toml_int_in(bootstrap, "Mode");
-	if (mode.ok) bsMode = static_cast<Mode>(mode.u.i);
+	auto darkMode = toml_bool_in(bootstrap, "DarkMode");
+	if (darkMode.ok) bsDarkMode = darkMode.u.b;
 	auto bodyBg = toml_array_in(bootstrap, "BodyBg");
 	if (bodyBg) {
 		auto lightBodyBg = toml_string_at(bodyBg, 0).u.s;
@@ -36,16 +36,16 @@ Bootstrap *Bootstrap::qmlAttachedProperties(QObject *object)
 	return new Bootstrap(object);
 }
 
-Bootstrap::Mode Bootstrap::mode() const
+bool Bootstrap::darkMode() const
 {
-	return bsMode;
+	return bsDarkMode;
 }
 
-void Bootstrap::setMode(Mode mode)
+void Bootstrap::setDarkMode(bool darkMode)
 {
-	if (mode == bsMode) return;
-	bsMode = mode;
-	emit modeChanged();
+	if (darkMode == bsDarkMode) return;
+	bsDarkMode = darkMode;
+	emit darkModeChanged();
 	emit bodyBgChanged();
 }
 
@@ -63,5 +63,5 @@ void Bootstrap::setTheme(Theme theme)
 
 QColor Bootstrap::bodyBg() const
 {
-	return bsMode ? bsDarkBodyBg : bsLightBodyBg;
+	return bsDarkMode ? bsDarkBodyBg : bsLightBodyBg;
 }

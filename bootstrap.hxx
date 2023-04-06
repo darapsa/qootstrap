@@ -13,8 +13,8 @@ class BootstrapPlugin : public QQmlEngineExtensionPlugin
 class Bootstrap : public QObject
 {
 	Q_OBJECT
-	Q_PROPERTY(Mode mode READ mode WRITE setMode NOTIFY modeChanged)
 	Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
+	Q_PROPERTY(bool darkMode READ darkMode WRITE setDarkMode NOTIFY darkModeChanged)
 	Q_PROPERTY(QColor bodyBg READ bodyBg NOTIFY bodyBgChanged)
 	QML_ELEMENT
 	QML_UNCREATABLE("Bootstrap is an attached property")
@@ -23,11 +23,6 @@ class Bootstrap : public QObject
 		explicit Bootstrap(QObject *parent = nullptr);
 		static Bootstrap *qmlAttachedProperties(QObject *object);
 
-		enum Mode {
-			LightMode,
-			DarkMode
-		};
-		Q_ENUM(Mode)
 		enum Theme {
 			None,
 			Primary,
@@ -41,21 +36,20 @@ class Bootstrap : public QObject
 			Link
 		};
 		Q_ENUM(Theme)
-
-		Mode mode() const;
-		void setMode(Mode mode);
 		Theme theme() const;
 		void setTheme(Theme theme);
+		bool darkMode() const;
+		void setDarkMode(bool darkMode);
 		QColor bodyBg() const;
 
 	signals:
-		void modeChanged();
 		void themeChanged();
+		void darkModeChanged();
 		void bodyBgChanged();
 
 	private:
-		Mode bsMode;
 		Theme bsTheme;
+		bool bsDarkMode;
 		QColor bsLightBodyBg;
 		QColor bsDarkBodyBg;
 };
