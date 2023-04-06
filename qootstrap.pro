@@ -15,11 +15,10 @@ style.files = \
 	ApplicationWindow.qml
 style.path = $$[QT_INSTALL_QML]/QtQuick/Controls.2/$$QML_IMPORT_NAME
 
-HEADERS += $${TARGET}.hxx
+HEADERS += $${QML_IMPORT_NAME}.hxx
 SOURCES += \
-	$${TARGET}.cxx \
+	$${QML_IMPORT_NAME}.cxx \
 	tomlc99/toml.c
-TARGET = qootstrap
 target.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
 INSTALLS += import style target

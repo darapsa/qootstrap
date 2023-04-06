@@ -1,5 +1,5 @@
 #include "tomlc99/toml.h"
-#include "bootstrap.hxx"
+#include "Bootstrap.hxx"
 
 Bootstrap::Bootstrap(QObject *parent):
 	QObject(parent),
