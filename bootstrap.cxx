@@ -1,8 +1,11 @@
 #include "bootstrap.hxx"
 
 Bootstrap::Bootstrap(QObject *parent):
-	QQmlEngineExtensionPlugin(parent),
-	m_purpose(None)
+	QObject(parent),
+	bs_mode(LightMode),
+	bs_theme(None),
+	bs_lightBodyBg("#fff"),
+	bs_darkBodyBg("#212529")
 {
 }
 
@@ -11,14 +14,46 @@ Bootstrap *Bootstrap::qmlAttachedProperties(QObject *object)
 	return new Bootstrap(object);
 }
 
-Bootstrap::Purpose Bootstrap::purpose() const
+Bootstrap::Mode Bootstrap::mode() const
 {
-	return m_purpose;
+	return bs_mode;
 }
 
-void Bootstrap::setPurpose(Purpose purpose)
+void Bootstrap::setMode(Mode mode)
 {
-	if (purpose == m_purpose) return;
-	m_purpose = purpose;
-	emit purposeChanged();
+	if (mode == bs_mode) return;
+	bs_mode = mode;
+	emit modeChanged();
+	emit bodyBgChanged();
+}
+
+Bootstrap::Theme Bootstrap::theme() const
+{
+	return bs_theme;
+}
+
+void Bootstrap::setTheme(Theme theme)
+{
+	if (theme == bs_theme) return;
+	bs_theme = theme;
+	emit themeChanged();
+}
+
+QColor Bootstrap::bodyBg() const
+{
+	return bs_mode ? bs_darkBodyBg : bs_lightBodyBg;
+}
+
+void Bootstrap::setLightBodyBg(QColor lightBodyBg)
+{
+	if (lightBodyBg == bs_lightBodyBg) return;
+	bs_lightBodyBg = lightBodyBg;
+	emit bodyBgChanged();
+}
+
+void Bootstrap::setDarkBodyBg(QColor darkBodyBg)
+{
+	if (darkBodyBg == bs_darkBodyBg) return;
+	bs_darkBodyBg = darkBodyBg;
+	emit bodyBgChanged();
 }
