@@ -1,15 +1,23 @@
+#include <toml.h>
 #include "bootstrap.hxx"
 
 Bootstrap::Bootstrap(QObject *parent):
 	QObject(parent),
+	bs_mode(LightMode),
 	bs_theme(None),
 	bs_lightBodyBg("#fff"),
 	bs_darkBodyBg("#212529")
 {
 	QFile conf{QStringLiteral(":/qtquickcontrols2.conf")};
-	conf.open(QFile::ReadOnly | QFile::Text);
-	qDebug() << conf.readAll();
+	if (!conf.open(QIODevice::ReadOnly | QIODevice::Text)) return;
+	auto toml = toml_parse(conf.readAll().data(), nullptr, 0);
 	conf.close();
+	auto bootstrap = toml_table_in(toml, "Bootstrap");
+	if (bootstrap) {
+		auto mode = toml_int_in(bootstrap, "Mode");
+		if (mode.ok) bs_mode = static_cast<Mode>(mode.u.i);
+	}
+	toml_free(toml);
 }
 
 Bootstrap *Bootstrap::qmlAttachedProperties(QObject *object)

@@ -17,6 +17,7 @@ style.path = $$[QT_INSTALL_QML]/QtQuick/Controls.2/$$QML_IMPORT_NAME
 
 HEADERS += $${TARGET}.hxx
 SOURCES += $${TARGET}.cxx
+LIBS += -ltoml
 TARGET = qqc2$$TARGET
 target.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
