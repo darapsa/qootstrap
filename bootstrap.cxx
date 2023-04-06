@@ -2,11 +2,14 @@
 
 Bootstrap::Bootstrap(QObject *parent):
 	QObject(parent),
-	bs_mode(LightMode),
 	bs_theme(None),
 	bs_lightBodyBg("#fff"),
 	bs_darkBodyBg("#212529")
 {
+	QFile conf{QStringLiteral(":/qtquickcontrols2.conf")};
+	conf.open(QFile::ReadOnly | QFile::Text);
+	qDebug() << conf.readAll();
+	conf.close();
 }
 
 Bootstrap *Bootstrap::qmlAttachedProperties(QObject *object)
