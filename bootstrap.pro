@@ -19,7 +19,7 @@ HEADERS += $${TARGET}.hxx
 SOURCES += \
 	$${TARGET}.cxx \
 	tomlc99/toml.c
-TARGET = qqc2$$TARGET
+TARGET = qootstrap
 target.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
 INSTALLS += import style target

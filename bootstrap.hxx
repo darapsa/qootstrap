@@ -4,7 +4,7 @@
 #include <QtQml>
 #include <QColor>
 
-class BootstrapPlugin : public QQmlEngineExtensionPlugin
+class Qootstrap : public QQmlEngineExtensionPlugin
 {
 	Q_OBJECT
 	Q_PLUGIN_METADATA(IID QQmlEngineExtensionInterface_iid)
