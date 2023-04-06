@@ -7,7 +7,7 @@
 class Qootstrap : public QQmlEngineExtensionPlugin
 {
 	Q_OBJECT
-	Q_PLUGIN_METADATA(IID QQmlEngineExtensionInterface_iid)
+	Q_PLUGIN_METADATA(IID "org.darapsa.Qootstrap")
 };
 
 class Bootstrap : public QObject

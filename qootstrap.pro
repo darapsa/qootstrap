@@ -1,5 +1,6 @@
 TEMPLATE = lib
 CONFIG += plugin qmltypes
+wasm: CONFIG += static
 QT += qml
 
 QML_IMPORT_NAME = Bootstrap

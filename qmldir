@@ -1,2 +1,3 @@
 module Bootstrap
 plugin qootstrap
+classname Qootstrap
