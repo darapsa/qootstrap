@@ -19,6 +19,7 @@ SOURCES += \
 	$${QML_IMPORT_NAME}.cxx \
 	tomlc99/toml.c
 android: TARGET = qml_$${QML_IMPORT_NAME}_$$TARGET
+ios: CONFIG(debug, debug|release): TARGET = $${TARGET}_debug
 target.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
 INSTALLS += import style target
