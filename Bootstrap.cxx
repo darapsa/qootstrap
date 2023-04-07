@@ -8,7 +8,9 @@ Bootstrap::Bootstrap(QObject *parent):
 	bsLightBodyColor("#212529"),
 	bsDarkBodyColor("#adb5bd"),
 	bsLightBodyBg("#fff"),
-	bsDarkBodyBg("#212529")
+	bsDarkBodyBg("#212529"),
+	bsLightBorderColor("#dee2e6"),
+	bsDarkBorderColor("#495057")
 {
 	QFile conf{QStringLiteral(":/qtquickcontrols2.conf")};
 	if (!conf.open(QIODevice::ReadOnly | QIODevice::Text)) return;
@@ -39,6 +41,15 @@ Bootstrap::Bootstrap(QObject *parent):
 		bsDarkBodyBg = QColor{darkBodyBg};
 		free(darkBodyBg);
 	}
+	auto borderColor = toml_array_in(bootstrap, "BorderColor");
+	if (borderColor) {
+		auto lightBorderColor = toml_string_at(borderColor, 0).u.s;
+		bsLightBorderColor = QColor{lightBorderColor};
+		free(lightBorderColor);
+		auto darkBorderColor = toml_string_at(borderColor, 1).u.s;
+		bsDarkBorderColor = QColor{darkBorderColor};
+		free(darkBorderColor);
+	}
 	toml_free(toml);
 }
 
@@ -59,6 +70,7 @@ void Bootstrap::setDarkMode(bool darkMode)
 	emit darkModeChanged();
 	emit bodyColorChanged();
 	emit bodyBgChanged();
+	emit borderColorChanged();
 }
 
 Bootstrap::Theme Bootstrap::theme() const
@@ -81,4 +93,9 @@ QColor Bootstrap::bodyColor() const
 QColor Bootstrap::bodyBg() const
 {
 	return bsDarkMode ? bsDarkBodyBg : bsLightBodyBg;
+}
+
+QColor Bootstrap::borderColor() const
+{
+	return bsDarkMode ? bsDarkBorderColor : bsLightBorderColor;
 }
