@@ -5,6 +5,8 @@ Bootstrap::Bootstrap(QObject *parent):
 	QObject(parent),
 	bsTheme(None),
 	bsDarkMode(false),
+	bsLightBodyColor("#212529"),
+	bsDarkBodyColor("#adb5bd"),
 	bsLightBodyBg("#fff"),
 	bsDarkBodyBg("#212529")
 {
@@ -19,6 +21,15 @@ Bootstrap::Bootstrap(QObject *parent):
 	}
 	auto darkMode = toml_bool_in(bootstrap, "DarkMode");
 	if (darkMode.ok) bsDarkMode = darkMode.u.b;
+	auto bodyColor = toml_array_in(bootstrap, "BodyColor");
+	if (bodyColor) {
+		auto lightBodyColor = toml_string_at(bodyColor, 0).u.s;
+		bsLightBodyColor = QColor{lightBodyColor};
+		free(lightBodyColor);
+		auto darkBodyColor = toml_string_at(bodyColor, 1).u.s;
+		bsDarkBodyColor = QColor{darkBodyColor};
+		free(darkBodyColor);
+	}
 	auto bodyBg = toml_array_in(bootstrap, "BodyBg");
 	if (bodyBg) {
 		auto lightBodyBg = toml_string_at(bodyBg, 0).u.s;
@@ -46,6 +57,7 @@ void Bootstrap::setDarkMode(bool darkMode)
 	if (darkMode == bsDarkMode) return;
 	bsDarkMode = darkMode;
 	emit darkModeChanged();
+	emit bodyColorChanged();
 	emit bodyBgChanged();
 }
 
@@ -59,6 +71,11 @@ void Bootstrap::setTheme(Theme theme)
 	if (theme == bsTheme) return;
 	bsTheme = theme;
 	emit themeChanged();
+}
+
+QColor Bootstrap::bodyColor() const
+{
+	return bsDarkMode ? bsDarkBodyColor : bsLightBodyColor;
 }
 
 QColor Bootstrap::bodyBg() const

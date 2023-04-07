@@ -10,7 +10,8 @@ import.files = qmldir
 import.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
 style.files = \
-	ApplicationWindow.qml
+	ApplicationWindow.qml \
+	Label.qml
 style.path = $$[QT_INSTALL_QML]/QtQuick/Controls.2/$$QML_IMPORT_NAME
 
 HEADERS += $${QML_IMPORT_NAME}.hxx

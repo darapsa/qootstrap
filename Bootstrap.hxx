@@ -15,6 +15,7 @@ class Bootstrap : public QObject
 	Q_OBJECT
 	Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
 	Q_PROPERTY(bool darkMode READ darkMode WRITE setDarkMode NOTIFY darkModeChanged)
+	Q_PROPERTY(QColor bodyColor READ bodyColor NOTIFY bodyColorChanged)
 	Q_PROPERTY(QColor bodyBg READ bodyBg NOTIFY bodyBgChanged)
 	QML_ELEMENT
 	QML_UNCREATABLE("Bootstrap is an attached property")
@@ -40,16 +41,20 @@ class Bootstrap : public QObject
 		void setTheme(Theme theme);
 		bool darkMode() const;
 		void setDarkMode(bool darkMode);
+		QColor bodyColor() const;
 		QColor bodyBg() const;
 
 	signals:
 		void themeChanged();
 		void darkModeChanged();
+		void bodyColorChanged();
 		void bodyBgChanged();
 
 	private:
 		Theme bsTheme;
 		bool bsDarkMode;
+		QColor bsLightBodyColor;
+		QColor bsDarkBodyColor;
 		QColor bsLightBodyBg;
 		QColor bsDarkBodyBg;
 };
