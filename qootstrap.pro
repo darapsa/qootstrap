@@ -6,7 +6,7 @@ QML_IMPORT_NAME = Bootstrap
 QML_IMPORT_MAJOR_VERSION = 5
 QML_IMPORT_MINOR_VERSION = 3
 
-import.files = qmldir
+import.files = imports/$$QML_IMPORT_NAME/qmldir
 import.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
 style.files = \

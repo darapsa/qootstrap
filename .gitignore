@@ -3,3 +3,5 @@
 *.user*
 .DS_Store
 build
+imports/Bootstrap/*
+!imports/Bootstrap/qmldir
