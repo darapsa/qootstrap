@@ -3,13 +3,12 @@
 
 #define APPEND_COLORS(A, B) \
 	colors = toml_array_in(bootstrap, A);\
-	if (colors)\
-		for (int i = 0; ; i++) {\
-			auto color = toml_string_at(colors, i);\
-			if (!color.ok) break;\
-			B.append(QColor{color.u.s});\
-			free(color.u.s);\
-		}
+	if (colors) for (int i = 0; ; i++) {\
+		auto color = toml_string_at(colors, i);\
+		if (!color.ok) break;\
+		B.append(QColor{color.u.s});\
+		free(color.u.s);\
+	}
 	
 Bootstrap::Bootstrap(QObject *parent):
 	QObject{parent},
