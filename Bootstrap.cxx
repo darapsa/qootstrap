@@ -1,6 +1,16 @@
 #include "tomlc99/toml.h"
 #include "Bootstrap.hxx"
 
+#define APPEND_COLORS(A, B) \
+	colors = toml_array_in(bootstrap, A);\
+	if (colors)\
+		for (int i = 0; ; i++) {\
+			auto color = toml_string_at(colors, i);\
+			if (!color.ok) break;\
+			B.append(QColor{color.u.s});\
+			free(color.u.s);\
+		}
+	
 Bootstrap::Bootstrap(QObject *parent):
 	QObject{parent},
 	bsMode{Light},
@@ -23,32 +33,10 @@ Bootstrap::Bootstrap(QObject *parent):
 	auto mode = toml_int_in(bootstrap, "Mode");
 	if (mode.ok) bsMode = static_cast<Mode>(mode.u.i);
 
-	auto colors = toml_array_in(bootstrap, "BodyColors");
-	if (colors)
-		for (int i = 0; ; i++) {
-			auto color = toml_string_at(colors, i);
-			if (!color.ok) break;
-			bodyColors.append(QColor{color.u.s});
-			free(color.u.s);
-		}
-
-	colors = toml_array_in(bootstrap, "BodyBgs");
-	if (colors)
-		for (int i = 0; ; i++) {
-			auto color = toml_string_at(colors, i);
-			if (!color.ok) break;
-			bodyBgs.append(QColor{color.u.s});
-			free(color.u.s);
-		}
-
-	colors = toml_array_in(bootstrap, "BorderColors");
-	if (colors)
-		for (int i = 0; ; i++) {
-			auto color = toml_string_at(colors, i);
-			if (!color.ok) break;
-			borderColors.append(QColor{color.u.s});
-			free(color.u.s);
-		}
+	toml_array_t *colors;
+	APPEND_COLORS("BodyColors", bodyColors);
+	APPEND_COLORS("BodyBgs", bodyBgs);
+	APPEND_COLORS("BorderColors", borderColors);
 
 	toml_free(toml);
 }
