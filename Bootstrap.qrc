@@ -1,5 +1,6 @@
 <!DOCTYPE RCC><RCC version="1.0">
 	<qresource prefix="/Bootstrap">
 		<file>ApplicationWindow.qml</file>
+		<file>Label.qml</file>
 	</qresource>
 </RCC>
