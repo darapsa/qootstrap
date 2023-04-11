@@ -1,12 +1,12 @@
 #include "tomlc99/toml.h"
 #include "Bootstrap.hxx"
 
-#define APPEND_COLORS(A, B) \
+#define OVERRIDE_COLORS(A, B) \
 	colors = toml_array_in(bootstrap, A);\
 	if (colors) for (int i = 0; ; i++) {\
 		auto color = toml_string_at(colors, i);\
 		if (!color.ok) break;\
-		B.append(QColor{color.u.s});\
+		B[i] = QColor{color.u.s};\
 		free(color.u.s);\
 	}
 	
@@ -33,9 +33,9 @@ Bootstrap::Bootstrap(QObject *parent):
 	if (mode.ok) bsMode = static_cast<Mode>(mode.u.i);
 
 	toml_array_t *colors;
-	APPEND_COLORS("BodyColors", bodyColors);
-	APPEND_COLORS("BodyBgs", bodyBgs);
-	APPEND_COLORS("BorderColors", borderColors);
+	OVERRIDE_COLORS("BodyColors", bodyColors);
+	OVERRIDE_COLORS("BodyBgs", bodyBgs);
+	OVERRIDE_COLORS("BorderColors", borderColors);
 
 	toml_free(toml);
 }
