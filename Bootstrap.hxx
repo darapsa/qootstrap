@@ -27,7 +27,7 @@ class Bootstrap : public QObject
 		explicit Bootstrap(QObject *parent = nullptr);
 		static Bootstrap *qmlAttachedProperties(QObject *object);
 
-		enum Mode {
+		enum class Mode {
 			Light,
 			Dark
 		};

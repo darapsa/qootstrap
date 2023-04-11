@@ -12,7 +12,7 @@
 	
 Bootstrap::Bootstrap(QObject *parent):
 	QObject{parent},
-	bsMode{Light},
+	bsMode{Mode::Light},
 	bsTheme{Theme::None},
 	bodyColors{{"#212529", "#adb5bd"}},
 	bodyBgs{{"#fff", "#212529"}},
@@ -74,15 +74,15 @@ void Bootstrap::setTheme(Theme theme)
 
 QColor Bootstrap::bodyColor() const
 {
-	return bodyColors.at(bsMode);
+	return bodyColors.at(static_cast<int>(bsMode));
 }
 
 QColor Bootstrap::bodyBg() const
 {
-	return bodyBgs.at(bsMode);
+	return bodyBgs.at(static_cast<int>(bsMode));
 }
 
 QColor Bootstrap::borderColor() const
 {
-	return borderColors.at(bsMode);
+	return borderColors.at(static_cast<int>(bsMode));
 }
