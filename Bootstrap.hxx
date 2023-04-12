@@ -22,10 +22,13 @@ class Bootstrap : public QObject
 	Q_PROPERTY(QFont bodyFont READ bodyFont NOTIFY bodyFontChanged)
 	Q_PROPERTY(QColor bodyColor READ bodyColor NOTIFY bodyColorChanged)
 	Q_PROPERTY(QColor bodyBg READ bodyBg NOTIFY bodyBgChanged)
-	Q_PROPERTY(QColor headingColor READ headingColor
-			NOTIFY headingColorChanged)
 	Q_PROPERTY(QColor borderColor READ borderColor
 			NOTIFY borderColorChanged)
+	Q_PROPERTY(int heading READ heading WRITE setHeading
+			NOTIFY headingChanged)
+	Q_PROPERTY(QFont headingFont READ headingFont NOTIFY headingFontChanged)
+	Q_PROPERTY(QColor headingColor READ headingColor
+			NOTIFY headingColorChanged)
 	QML_ELEMENT
 	QML_UNCREATABLE("Bootstrap is an attached property")
 
@@ -61,8 +64,13 @@ class Bootstrap : public QObject
 		QFont bodyFont() const;
 		QColor bodyColor() const;
 		QColor bodyBg() const;
-		QColor headingColor() const;
 		QColor borderColor() const;
+
+		int heading() const;
+		void setHeading(int heading);
+		QFont headingFont() const;
+		Q_INVOKABLE qreal headingFontSize(const qreal parentWidth = .0);
+		QColor headingColor() const;
 
 	signals:
 		void themeChanged();
@@ -71,8 +79,10 @@ class Bootstrap : public QObject
 		void bodyFontChanged();
 		void bodyColorChanged();
 		void bodyBgChanged();
-		void headingColorChanged();
 		void borderColorChanged();
+		void headingChanged();
+		void headingFontChanged();
+		void headingColorChanged();
 
 	private:
 		Mode bsMode;
@@ -81,8 +91,16 @@ class Bootstrap : public QObject
 		QFont bsBodyFont;
 		QVector<QColor> bodyColors;
 		QVector<QColor> bodyBgs;
-		QVector<QColor> headingColors;
 		QVector<QColor> borderColors;
+		int htmlHeading;
+		QFont bsHeadingFont;
+		QVector<QColor> headingColors;
+		QVector<qreal> h1FontSize;
+		QVector<qreal> h2FontSize;
+		QVector<qreal> h3FontSize;
+		QVector<qreal> h4FontSize;
+		QVector<qreal> h5FontSize;
+		QVector<qreal> h6FontSize;
 };
 
 QML_DECLARE_TYPEINFO(Bootstrap, QML_HAS_ATTACHED_PROPERTIES)
