@@ -22,6 +22,8 @@ class Bootstrap : public QObject
 	Q_PROPERTY(QFont bodyFont READ bodyFont NOTIFY bodyFontChanged)
 	Q_PROPERTY(QColor bodyColor READ bodyColor NOTIFY bodyColorChanged)
 	Q_PROPERTY(QColor bodyBg READ bodyBg NOTIFY bodyBgChanged)
+	Q_PROPERTY(QColor headingColor READ headingColor
+			NOTIFY headingColorChanged)
 	Q_PROPERTY(QColor borderColor READ borderColor
 			NOTIFY borderColorChanged)
 	QML_ELEMENT
@@ -59,16 +61,18 @@ class Bootstrap : public QObject
 		QFont bodyFont() const;
 		QColor bodyColor() const;
 		QColor bodyBg() const;
+		QColor headingColor() const;
 		QColor borderColor() const;
 
 	signals:
 		void themeChanged();
 		void modeChanged();
-		void bodyColorChanged();
-		void bodyBgChanged();
-		void borderColorChanged();
 		void fontSansSerifChanged();
 		void bodyFontChanged();
+		void bodyColorChanged();
+		void bodyBgChanged();
+		void headingColorChanged();
+		void borderColorChanged();
 
 	private:
 		Mode bsMode;
@@ -77,6 +81,7 @@ class Bootstrap : public QObject
 		QFont bsBodyFont;
 		QVector<QColor> bodyColors;
 		QVector<QColor> bodyBgs;
+		QVector<QColor> headingColors;
 		QVector<QColor> borderColors;
 };
 

@@ -29,6 +29,7 @@ Bootstrap::Bootstrap(QObject *parent):
 	bsBodyFont{bsFontSansSerif},
 	bodyColors{{"#212529", "#adb5bd"}},
 	bodyBgs{{"#fff", "#212529"}},
+	headingColors{{bodyColors.at(0), bodyColors.at(1)}},
 	borderColors{{"#dee2e6", "#495057"}}
 {
 	bsBodyFont.setStyleHint(QFont::SansSerif);
@@ -63,6 +64,7 @@ Bootstrap::Bootstrap(QObject *parent):
 	toml_array_t *colors;
 	OVERRIDE_COLORS("BodyColors", bodyColors);
 	OVERRIDE_COLORS("BodyBgs", bodyBgs);
+	OVERRIDE_COLORS("HeadingColors", headingColors);
 	OVERRIDE_COLORS("BorderColors", borderColors);
 
 	toml_free(toml);
@@ -85,6 +87,7 @@ void Bootstrap::setMode(Mode mode)
 	emit modeChanged();
 	emit bodyColorChanged();
 	emit bodyBgChanged();
+	emit headingColorChanged();
 	emit borderColorChanged();
 }
 
@@ -118,6 +121,11 @@ QColor Bootstrap::bodyColor() const
 QColor Bootstrap::bodyBg() const
 {
 	return bodyBgs.at(static_cast<int>(bsMode));
+}
+
+QColor Bootstrap::headingColor() const
+{
+	return headingColors.at(static_cast<int>(bsMode));
 }
 
 QColor Bootstrap::borderColor() const
