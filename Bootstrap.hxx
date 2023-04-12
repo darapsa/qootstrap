@@ -1,8 +1,9 @@
 #ifndef BOOTSTRAP_HXX
 #define BOOTSTRAP_HXX
 
-#include <QtQml>
+#include <QFont>
 #include <QColor>
+#include <QtQml>
 
 class Qootstrap : public QQmlEngineExtensionPlugin
 {
@@ -16,6 +17,9 @@ class Bootstrap : public QObject
 	Q_CLASSINFO("RegisterEnumClassesUnscoped", "false")
 	Q_PROPERTY(Mode mode READ mode WRITE setMode NOTIFY modeChanged)
 	Q_PROPERTY(Theme theme READ theme WRITE setTheme NOTIFY themeChanged)
+	Q_PROPERTY(QString fontSansSerif READ fontSansSerif
+			NOTIFY fontSansSerifChanged)
+	Q_PROPERTY(QFont bodyFont READ bodyFont NOTIFY bodyFontChanged)
 	Q_PROPERTY(QColor bodyColor READ bodyColor NOTIFY bodyColorChanged)
 	Q_PROPERTY(QColor bodyBg READ bodyBg NOTIFY bodyBgChanged)
 	Q_PROPERTY(QColor borderColor READ borderColor
@@ -51,6 +55,8 @@ class Bootstrap : public QObject
 		Theme theme() const;
 		void setTheme(Theme theme);
 
+		QString fontSansSerif() const;
+		QFont bodyFont() const;
 		QColor bodyColor() const;
 		QColor bodyBg() const;
 		QColor borderColor() const;
@@ -61,10 +67,14 @@ class Bootstrap : public QObject
 		void bodyColorChanged();
 		void bodyBgChanged();
 		void borderColorChanged();
+		void fontSansSerifChanged();
+		void bodyFontChanged();
 
 	private:
 		Mode bsMode;
 		Theme bsTheme;
+		QString bsFontSansSerif;
+		QFont bsBodyFont;
 		QVector<QColor> bodyColors;
 		QVector<QColor> bodyBgs;
 		QVector<QColor> borderColors;
