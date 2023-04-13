@@ -136,6 +136,13 @@ void Bootstrap::setMode(Mode mode)
 	emit bodyBgChanged();
 	emit borderColorChanged();
 	emit headingColorChanged();
+	for (auto sibling : parent()->findChildren<QObject *>())
+		if (strstr(sibling->metaObject()->className(), "_QMLTYPE_"))
+			for (auto child : sibling->children())
+				if (!strcmp(child->metaObject()->className(),
+							"Bootstrap"))
+					qobject_cast<Bootstrap *>(child)
+						->setMode(mode);
 }
 
 Bootstrap::Theme Bootstrap::theme() const

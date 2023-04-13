@@ -1,9 +1,11 @@
 import QtQuick 2.15
+import QtQuick.Window 2.15
 import QtQuick.Templates 2.15
 import Bootstrap 5.3
 
 Label {
 	id: control
+	Bootstrap.mode: Window.window.Bootstrap.mode
 	font {
 		family: Bootstrap.heading
 				? Bootstrap.headingFont.family
