@@ -203,8 +203,9 @@ void Bootstrap::setHeading(int heading)
 {
 	if (heading == htmlHeading) return;
 	htmlHeading = heading;
-	bsHeadingFont.setPointSizeF(headingFontSize());
 	emit headingChanged();
+	bsHeadingFont.setPointSizeF(headingFontSize());
+	emit headingFontChanged();
 }
 
 QFont Bootstrap::headingFont() const
