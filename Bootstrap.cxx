@@ -115,6 +115,18 @@ Bootstrap::Bootstrap(QObject *parent):
 	OVERRIDE_HX_FONT_SIZE("H6FontSize", h6FontSize);
 
 	toml_free(toml);
+
+	QObject *ancestor;
+	QObject *grandAncestor = parent->parent();
+	while ((ancestor = grandAncestor))
+		if (!(grandAncestor = ancestor->parent()))
+			for (auto child : ancestor->findChildren<QObject *>())
+				if (!strcmp(child->metaObject()->className(),
+							"Bootstrap")) {
+					bsMode = qobject_cast<Bootstrap *>
+						(child)->mode();
+					break;
+				}
 }
 
 Bootstrap *Bootstrap::qmlAttachedProperties(QObject *object)

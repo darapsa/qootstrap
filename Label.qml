@@ -5,7 +5,6 @@ import Bootstrap 5.3
 
 Label {
 	id: control
-	Bootstrap.mode: Window.window.Bootstrap.mode
 	font {
 		family: Bootstrap.heading
 				? Bootstrap.headingFont.family
