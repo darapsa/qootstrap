@@ -29,6 +29,7 @@ class Bootstrap : public QObject
 	Q_PROPERTY(QFont headingFont READ headingFont NOTIFY headingFontChanged)
 	Q_PROPERTY(QColor headingColor READ headingColor
 			NOTIFY headingColorChanged)
+	Q_PROPERTY(QColor cardBg READ cardBg NOTIFY cardBgChanged)
 	QML_ELEMENT
 	QML_UNCREATABLE("Bootstrap is an attached property")
 
@@ -72,6 +73,8 @@ class Bootstrap : public QObject
 		Q_INVOKABLE qreal headingFontSize(const qreal parentWidth = .0);
 		QColor headingColor() const;
 
+		QColor cardBg() const;
+
 	signals:
 		void themeChanged();
 		void modeChanged();
@@ -83,6 +86,7 @@ class Bootstrap : public QObject
 		void headingChanged();
 		void headingFontChanged();
 		void headingColorChanged();
+		void cardBgChanged();
 
 	private:
 		Mode bsMode;
@@ -101,6 +105,7 @@ class Bootstrap : public QObject
 		QVector<qreal> h4FontSize;
 		QVector<qreal> h5FontSize;
 		QVector<qreal> h6FontSize;
+		QVector<QColor> cardBgs;
 };
 
 QML_DECLARE_TYPEINFO(Bootstrap, QML_HAS_ATTACHED_PROPERTIES)

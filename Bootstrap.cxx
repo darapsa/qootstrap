@@ -69,7 +69,8 @@ Bootstrap::Bootstrap(QObject *parent):
 	h3FontSize{{20.8, .006}},
 	h4FontSize{{20.4, .003}},
 	h5FontSize{{20.0, .0}},
-	h6FontSize{{16.0, .0}}
+	h6FontSize{{16.0, .0}},
+	cardBgs{{bodyBgs.at(0), bodyBgs.at(1)}}
 {
 	bsBodyFont.setStyleHint(QFont::SansSerif);
 	bsBodyFont.setPointSizeF(16.0);
@@ -113,6 +114,7 @@ Bootstrap::Bootstrap(QObject *parent):
 	OVERRIDE_HX_FONT_SIZE("H4FontSize", h4FontSize);
 	OVERRIDE_HX_FONT_SIZE("H5FontSize", h5FontSize);
 	OVERRIDE_HX_FONT_SIZE("H6FontSize", h6FontSize);
+	OVERRIDE_COLORS("CardBgs", cardBgs);
 
 	toml_free(toml);
 
@@ -148,6 +150,7 @@ void Bootstrap::setMode(Mode mode)
 	emit bodyBgChanged();
 	emit borderColorChanged();
 	emit headingColorChanged();
+	emit cardBgChanged();
 	for (auto sibling : parent()->findChildren<QObject *>())
 		if (strstr(sibling->metaObject()->className(), "_QMLTYPE_"))
 			for (auto child : sibling->children())
@@ -234,4 +237,9 @@ qreal Bootstrap::headingFontSize(const qreal parentWidth)
 QColor Bootstrap::headingColor() const
 {
 	return headingColors.at(static_cast<int>(bsMode));
+}
+
+QColor Bootstrap::cardBg() const
+{
+	return cardBgs.at(static_cast<int>(bsMode));
 }
