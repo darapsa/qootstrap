@@ -2,5 +2,7 @@
 	<qresource prefix="/Bootstrap">
 		<file>ApplicationWindow.qml</file>
 		<file>Label.qml</file>
+		<file>Page.qml</file>
+		<file>ToolBar.qml</file>
 	</qresource>
 </RCC>
