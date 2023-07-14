@@ -11,6 +11,7 @@ import.path = $$[QT_INSTALL_QML]/$$QML_IMPORT_NAME
 
 style.files = \
 	ApplicationWindow.qml \
+	ComboBox.qml \
 	Label.qml \
 	Page.qml \
 	ToolBar.qml
