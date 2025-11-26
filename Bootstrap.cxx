@@ -20,7 +20,7 @@
 #define OVERRIDE_FONT_WEIGHT(A, B) \
 	{\
 		auto fontWeight = toml_int_in(bootstrap, A);\
-		if (fontWeight.ok) B.setWeight(fontWeight.u.i);\
+		if (fontWeight.ok) B.setWeight(static_cast<QFont::Weight>(fontWeight.u.i));\
 	}
 
 #define OVERRIDE_COLORS(A, B) \
