@@ -15,7 +15,7 @@ style.files = \
 	Label.qml \
 	Page.qml \
 	ToolBar.qml
-style.path = $$[QT_INSTALL_QML]/QtQuick/Controls.2/$$QML_IMPORT_NAME
+style.path = $$[QT_INSTALL_QML]/QtQuick/Controls/$$QML_IMPORT_NAME
 
 HEADERS += $${QML_IMPORT_NAME}.hxx
 SOURCES += \
